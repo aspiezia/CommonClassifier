@@ -46,6 +46,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     variableMap["Evt_Deta_JetsAverage"]=-999.;
     variableMap["blr_transformed"]=-999.;
     variableMap["Evt_M_MinDeltaRTaggedJets"]=-999.;
+    variableMap["bjetness_nlep"]=-999;
+    variableMap["bjetness_IP3dVal"]=-999.;
     
 
     // ==================================================
@@ -73,6 +75,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["6j2t"]->AddVariable("pt_all_jets_over_E_all_jets", &variableMap["pt_all_jets_over_E_all_jets"]);
     readerMap["6j2t"]->AddVariable("Mlb", &variableMap["Mlb"]);
     readerMap["6j2t"]->AddVariable("maxeta_tag_tag", &variableMap["maxeta_tag_tag"]);
+    readerMap["6j2t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["6j2t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 43
         readerMap["4j3t"]->AddVariable("HT", &variableMap["HT"]);
@@ -82,6 +86,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
         readerMap["4j3t"]->AddVariable("h1", &variableMap["h1"]);
     readerMap["4j3t"]->AddVariable("sphericity", &variableMap["sphericity"]);
     readerMap["4j3t"]->AddVariable("fourth_jet_pt", &variableMap["fourth_jet_pt"]);
+    readerMap["4j3t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["4j3t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 53
         readerMap["5j3t"]->AddVariable("blr_transformed", &variableMap["blr_transformed"]);
@@ -94,6 +100,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["5j3t"]->AddVariable("third_jet_pt", &variableMap["third_jet_pt"]);
     readerMap["5j3t"]->AddVariable("dr_between_lep_and_closest_jet", &variableMap["dr_between_lep_and_closest_jet"]);
     readerMap["5j3t"]->AddVariable("maxeta_tag_tag", &variableMap["maxeta_tag_tag"]);
+    readerMap["5j3t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["5j3t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 63
         readerMap["6j3t"]->AddVariable("aplanarity", &variableMap["aplanarity"]);
@@ -103,6 +111,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["6j3t"]->AddVariable("dev_from_avg_disc_btags", &variableMap["dev_from_avg_disc_btags"]);
     readerMap["6j3t"]->AddVariable("all_sum_pt_with_met", &variableMap["all_sum_pt_with_met"]);
     readerMap["6j3t"]->AddVariable("blr_transformed", &variableMap["blr_transformed"]);
+    readerMap["6j3t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["6j3t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 44
         readerMap["4j4t"]->AddVariable("all_sum_pt_with_met", &variableMap["all_sum_pt_with_met"]);
@@ -113,6 +123,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["4j4t"]->AddVariable("dr_between_lep_and_closest_jet", &variableMap["dr_between_lep_and_closest_jet"]);
     readerMap["4j4t"]->AddVariable("maxeta_jet_jet", &variableMap["maxeta_jet_jet"]);
     readerMap["4j4t"]->AddVariable("HT", &variableMap["HT"]);
+    readerMap["4j4t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["4j4t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 54
         readerMap["5j4t"]->AddVariable("Evt_Deta_JetsAverage", &variableMap["Evt_Deta_JetsAverage"]);
@@ -124,6 +136,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["5j4t"]->AddVariable("closest_tagged_dijet_mass", &variableMap["closest_tagged_dijet_mass"]);
     readerMap["5j4t"]->AddVariable("aplanarity", &variableMap["aplanarity"]);
     readerMap["5j4t"]->AddVariable("avg_dr_tagged_jets", &variableMap["avg_dr_tagged_jets"]);
+    readerMap["5j4t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["5j4t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
     // 64
         readerMap["6j4t"]->AddVariable("best_higgs_mass", &variableMap["best_higgs_mass"]);
@@ -132,6 +146,8 @@ BlrBDTClassifier::BlrBDTClassifier (string weightpath):btagMcut(0.8){
     readerMap["6j4t"]->AddVariable("fourth_highest_btag", &variableMap["fourth_highest_btag"]);
     readerMap["6j4t"]->AddVariable("all_sum_pt_with_met", &variableMap["all_sum_pt_with_met"]);
     readerMap["6j4t"]->AddVariable("fifth_highest_CSV", &variableMap["fifth_highest_CSV"]);
+    readerMap["6j4t"]->AddVariable("bjetness_nlep", &variableMap["bjetness_nlep"]);
+    readerMap["6j4t"]->AddVariable("bjetness_IP3dVal", &variableMap["bjetness_IP3dVal"]);
 
 
     // ==================================================
@@ -199,7 +215,8 @@ double BlrBDTClassifier::GetBDTOutput(const std::vector<TLorentzVector>& selecte
 				   const std::vector<TLorentzVector>& looseSelectedJetP4, 
 				   const std::vector<double>& looseSelectedJetCSV, 
 				   const TLorentzVector& metP4, 
-				   const double blr){
+				   const double blr,
+				   const int bjetness_nlep, const double bjetness_IP3dVal){
     
     // Reset all map entries to -999 so that noting is left over from the last event
     ResetVariableMap();
@@ -438,6 +455,8 @@ double BlrBDTClassifier::GetBDTOutput(const std::vector<TLorentzVector>& selecte
     variableMap["Evt_CSV_Average"]=averageCSV_all;
     variableMap["Evt_Deta_JetsAverage"]=detaJetsAverage;
     variableMap["blr_transformed"]=blr_transformed;
+    variableMap["bjetness_nlep"]=bjetness_nlep;
+    variableMap["bjetness_IP3dVal"]=bjetness_IP3dVal;
     
     // ==================================================
     // evaluate BDT of current category

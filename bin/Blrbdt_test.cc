@@ -31,6 +31,11 @@ int main(){
   //create a MET
   TLorentzVector lv_met;
   lv_met.SetPtEtaPhiM(92.1731872559,0., -1.08158898354, 0.);
+
+  //BJetness
+  int    bjetness_nlep    = 1;
+  double bjetness_IP3dVal = 0.0206538;
+
   for (int i=0; i<3; i++) {
     auto result = bdt.GetBDTOutput(
 				leps_p4,				
@@ -39,7 +44,9 @@ int main(){
 				{},
 				{},
 				lv_met,
-				0.8
+				0.8,
+				bjetness_nlep,
+				bjetness_IP3dVal
     );
     std::cout << "================================" << std::endl;
     std::cout << "bdtoutput=" << result << std::endl;

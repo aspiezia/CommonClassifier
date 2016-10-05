@@ -25,8 +25,9 @@ public:
 			const std::vector<TLorentzVector>& looseSelectedJetP4, 
 			const std::vector<double>& looseSelectedJetCSV, 
 			const TLorentzVector& metP4,
-			const double blr
- 		      );
+			const double blr,
+			const int bjetness_nlep, const double bjetness_IP3dVal
+			);
   
     // returns the category of the last evaluated Event
     std::string GetCategoryOfLastEvaluation() const;
